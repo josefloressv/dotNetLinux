@@ -3,17 +3,20 @@ using System.Diagnostics;
 using WebAsp1.Models;
 using WebAsp1.Models.ViewModel;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
 
 namespace WebAsp1.Controllers
 {
 	public class HomeController : Controller
 	{
+        private readonly IConfiguration _configuration;
 		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+		public HomeController(IConfiguration configuration, ILogger<HomeController> logger)
+        {
+            _configuration = configuration;
+            _logger = logger;
+        }
 
 		public IActionResult Index()
 		{
@@ -28,7 +31,8 @@ namespace WebAsp1.Controllers
 
 		public RedirectResult Insert(TodoViewModel item)
 		{
-			using (SqliteConnection con = new SqliteConnection("Data Source=db.sqlite"))
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+			using (SqliteConnection con = new SqliteConnection(connectionString))
 			{
 				using (var tableCmd = con.CreateCommand())
 				{
@@ -42,7 +46,8 @@ namespace WebAsp1.Controllers
 
         public RedirectResult Update(TodoViewModel item)
         {
-            using (SqliteConnection con = new SqliteConnection("Data Source=db.sqlite"))
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+			using (SqliteConnection con = new SqliteConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
@@ -58,7 +63,8 @@ namespace WebAsp1.Controllers
         {
 			List<TodoItem> list = new();
 
-            using (SqliteConnection con = new SqliteConnection("Data Source=db.sqlite"))
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+			using (SqliteConnection con = new SqliteConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
@@ -92,7 +98,8 @@ namespace WebAsp1.Controllers
         {
             TodoItem item = new();
 
-            using (SqliteConnection con = new SqliteConnection("Data Source=db.sqlite"))
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+			using (SqliteConnection con = new SqliteConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
@@ -116,7 +123,8 @@ namespace WebAsp1.Controllers
         [HttpPost]
 		public JsonResult Delete(int id)
 		{
-            using (SqliteConnection con = new SqliteConnection("Data Source=db.sqlite"))
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+			using (SqliteConnection con = new SqliteConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
