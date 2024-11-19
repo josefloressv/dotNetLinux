@@ -8,12 +8,11 @@ namespace WebAsp1.Controllers
 {
 	public class HomeController : Controller
 	{
-        private readonly IConfiguration _configuration;
 		private readonly ILogger<HomeController> _logger;
+        private readonly string connectionString = Environment.GetEnvironmentVariable("DbConnectionString");
 
-		public HomeController(IConfiguration configuration, ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger)
         {
-            _configuration = configuration;
             _logger = logger;
         }
 
@@ -30,7 +29,6 @@ namespace WebAsp1.Controllers
 
 		public RedirectResult Insert(TodoViewModel item)
 		{
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
 			using (SqlConnection con = new SqlConnection(connectionString))
 			{
 				using (var tableCmd = con.CreateCommand())
@@ -45,7 +43,6 @@ namespace WebAsp1.Controllers
 
         public RedirectResult Update(TodoViewModel item)
         {
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
 			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
@@ -62,7 +59,6 @@ namespace WebAsp1.Controllers
         {
 			List<TodoItem> list = new();
 
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
 			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
@@ -97,7 +93,6 @@ namespace WebAsp1.Controllers
         {
             TodoItem item = new();
 
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
 			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
@@ -122,7 +117,6 @@ namespace WebAsp1.Controllers
         [HttpPost]
 		public JsonResult Delete(int id)
 		{
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
 			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
