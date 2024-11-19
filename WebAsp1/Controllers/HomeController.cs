@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebAsp1.Models;
 using WebAsp1.Models.ViewModel;
-using Microsoft.Data.Sqlite;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 
 namespace WebAsp1.Controllers
 {
@@ -32,7 +31,7 @@ namespace WebAsp1.Controllers
 		public RedirectResult Insert(TodoViewModel item)
 		{
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
-			using (SqliteConnection con = new SqliteConnection(connectionString))
+			using (SqlConnection con = new SqlConnection(connectionString))
 			{
 				using (var tableCmd = con.CreateCommand())
 				{
@@ -47,7 +46,7 @@ namespace WebAsp1.Controllers
         public RedirectResult Update(TodoViewModel item)
         {
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
-			using (SqliteConnection con = new SqliteConnection(connectionString))
+			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
@@ -64,7 +63,7 @@ namespace WebAsp1.Controllers
 			List<TodoItem> list = new();
 
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
-			using (SqliteConnection con = new SqliteConnection(connectionString))
+			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
@@ -99,7 +98,7 @@ namespace WebAsp1.Controllers
             TodoItem item = new();
 
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
-			using (SqliteConnection con = new SqliteConnection(connectionString))
+			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
@@ -124,7 +123,7 @@ namespace WebAsp1.Controllers
 		public JsonResult Delete(int id)
 		{
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
-			using (SqliteConnection con = new SqliteConnection(connectionString))
+			using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (var tableCmd = con.CreateCommand())
                 {
