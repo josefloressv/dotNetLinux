@@ -396,3 +396,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# DS_Store files
+.DS_Store
+
+# Terraform files
+.terraform
+.terraform.lock.hcl
+**.tfplan

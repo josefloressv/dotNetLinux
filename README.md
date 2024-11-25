@@ -5,7 +5,7 @@ Mount project dotNet Core in Linux
 ```bash
 # Build and run
 docker build -t webasp1 .
-docker run -d -p 80:80 --name webasp1_container webasp1
+docker run -d -p 8080:808 -e  DbConnectionString=""  --name webasp1_container webasp1
 
 # Check files in container
 docker exec -it <containerid> /bin/sh
