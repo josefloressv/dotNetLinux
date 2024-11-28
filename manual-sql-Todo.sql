@@ -10,5 +10,6 @@ CREATE TABLE Todo (
 INSERT INTO Todo (Name) VALUES ('Snacks');
 INSERT INTO Todo (Name) VALUES ('Groceries');
 INSERT INTO Todo (Name) VALUES ('Candies');
-INSERT INTO Todo (Name) VALUES ('Again and again');
 INSERT INTO Todo (Name) VALUES ('blabla');
+
+SELECT * FROM Todo;

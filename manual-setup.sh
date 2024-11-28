@@ -15,5 +15,14 @@ aws s3 rm s3://cloudnativesv-terraform-dev --recursive
 ## delete the bucket (from AWS console cleanup the bucket)
 aws s3api delete-bucket --bucket cloudnativesv-terraform-dev
 
-
+# Create EKS cluster
+eksctl create cluster \
+--name cloudnativesv \
+--region=us-east-1 \
+--nodegroup-name cloudnativesv-workers \
+--node-type t3.medium \
+--nodes 2 \
+--nodes-min 1 \
+--nodes-max 4 \
+--managed
 
