@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-ecr-pod
+spec:
+  serviceAccountName: dotnetapp-sa  # Usa la cuenta de servicio específica
+  containers:
+  - name: nginx
+    image: 730335285880.dkr.ecr.us-east-1.amazonaws.com/dotnetapp:nginx2
