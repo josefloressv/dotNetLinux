@@ -1,8 +1,8 @@
 # Network
 vpc_cidr = "172.31.0.0/16"
 
-vpc_id     = "vpc-041a81b2c9b992ea3"
-subnet_ids = ["subnet-0fddf34b89d35284b", "subnet-03d4296b73b7edbee"] # Public Subnets us-east-1a and us-east-1b
+vpc_id     = "vpc-0ce8d348680417217"
+subnet_ids = ["subnet-0da50e598a7f34759", "subnet-0dbc379791a9edd2c"] # Public Subnets us-east-1a and us-east-1b
 
 # RDS Instance
 engine            = "sqlserver-ex"
