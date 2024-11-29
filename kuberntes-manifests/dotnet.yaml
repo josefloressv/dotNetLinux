@@ -1,0 +1,36 @@
+# Create pod dotnet in yaml manifest file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dotnetapp
+  template:
+    metadata:
+      labels:
+        app: dotnetapp
+    spec:
+      containers:
+      - name: dotnetapp
+        image: 381492032511.dkr.ecr.us-east-1.amazonaws.com/dotnetapp:v2
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DbConnectionString
+          value: Server=cloudnativesv-dev.ch864uys6klr.us-east-1.rds.amazonaws.com,1433;Database=dbTodo;User Id=admin;Password=CS5EqE(!BqV:x$f}58dYw!I*y{GT;TrustServerCertificate=True;
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnet-service
+spec:
+  selector:
+    app: dotnetapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
