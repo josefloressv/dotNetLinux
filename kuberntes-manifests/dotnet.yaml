@@ -20,7 +20,10 @@ spec:
         - containerPort: 8080
         env:
         - name: DbConnectionString
-          value: Server=cloudnativesv-dev.ch864uys6klr.us-east-1.rds.amazonaws.com,1433;Database=dbTodo;User Id=admin;Password=CS5EqE(!BqV:x$f}58dYw!I*y{GT;TrustServerCertificate=True;
+          valueFrom:
+            secretKeyRef:
+              name: dotnet-secret
+              key: DbConnectionString
 ---
 apiVersion: v1
 kind: Service
@@ -34,3 +37,12 @@ spec:
       port: 80
       targetPort: 8080
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dotnet-secret
+type: Opaque
+data:
+  DbConnectionString: U2VydmVyPWNsb3VkbmF0aXZlc3YtZGV2LmNoODY0dXlzNmtsci51cy1lYXN0LTEucmRzLmFtYXpvbmF3cy5jb20sMTQzMztEYXRhYmFzZT1kYlRvZG87VXNlciBJZD1hZG1pbjtQYXNzd29yZD1DUzVFcUUoIUJxVjp4JGZ9NThkWXchSSp5e0dUO1RydXN0U2VydmVyQ2VydGlmaWNhdGU9VHJ1ZTsK
+  
