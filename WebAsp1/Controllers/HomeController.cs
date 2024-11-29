@@ -75,7 +75,7 @@ namespace WebAsp1.Controllers
                                 list.Add(
                                     new TodoItem
                                     {
-                                        Id = (int)reader.GetInt64(0),
+                                        Id = (int)reader.GetIn32(0),
                                         Name = reader.GetString(1),
                                     });
                             }
@@ -105,7 +105,7 @@ namespace WebAsp1.Controllers
                         if (reader.HasRows)
                         {
                             reader.Read();
-                            item.Id = (int)reader.GetInt64(0);
+                            item.Id = (int)reader.GetIn32(0);
                             item.Name = reader.GetString(1);
                         }
                         return item;

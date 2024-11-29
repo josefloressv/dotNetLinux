@@ -15,9 +15,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-# Copy db.sqlite to the container
-COPY WebAsp1/db.sqlite .
-
 # Copy the entrypoint script
 COPY entrypoint.sh .
 
